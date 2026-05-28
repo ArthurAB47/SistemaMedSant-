@@ -95,6 +95,19 @@ class Medico(Usuario):
 
         return soma / len(self.__avaliacoes)
     
+    def confirmar_presenca_paciente(self, consulta):
+        if consulta.medico != self:
+            raise ValueError("erro: Essa consulta não pertence a este médico!")
+        
+        consulta.alterar_status("confirmada")
+
+    def encerrar_consulta(self, consulta, observacao):
+        if consulta.medico != self:
+            raise ValueError("erro: Essa consulta não pertence a este médico!")
+
+        consulta.adicionar_observacao(observacao)
+        consulta.alterar_status("realizada")
+    
     def exibir_dados(self):
         print("Dados do médico:")
         print(f"Nome: {self.nome}")
