@@ -1,45 +1,52 @@
-class Notificacao:
-    """Representa uma notificação enviada ao paciente sobre sua consulta."""
+class Avaliacao:
+    """Representa uma avaliação feita por um paciente após consulta realizada."""
     
-    def __init__(self, paciente, consulta):
+    def __init__(self, paciente, medico, consulta, nota, comentario):
         self._paciente = paciente
+        self._medico = medico
         self._consulta = consulta
-        self._mensagem = ""
-        self._status = "pendente"   # pendente, enviada, lida
-        self.gerar_mensagem()
+        self._nota = None
+        self._comentario = None
+        self.validar_nota(nota)
+        self.validar_comentario(comentario)
     
     @property
     def paciente(self):
         return self._paciente
     
     @property
+    def medico(self):
+        return self._medico
+    
+    @property
     def consulta(self):
         return self._consulta
     
     @property
-    def mensagem(self):
-        return self._mensagem
+    def nota(self):
+        return self._nota
     
     @property
-    def status(self):
-        return self._status
+    def comentario(self):
+        return self._comentario
     
-    def gerar_mensagem(self):
-        """Gera automaticamente a mensagem com base nos dados da consulta."""
-        self._mensagem = (f"Olá {self.paciente.nome}, sua consulta com Dr(a). {self.consulta.medico.nome} "
-                          f"está agendada para {self.consulta.data_hora}. Status: {self.consulta.status}.")
+    def validar_nota(self, nota):
+        """Valida a nota (deve ser inteiro entre 1 e 5)."""
+        try:
+            nota_int = int(nota)
+            if 1 <= nota_int <= 5:
+                self._nota = nota_int
+            else:
+                raise ValueError("A nota deve estar entre 1 e 5.")
+        except ValueError:
+            raise ValueError("Nota inválida. Digite um número inteiro de 1 a 5.")
     
-    def enviar(self):
-        """Simula o envio da notificação."""
-        if self._status == "pendente":
-            print(f"[NOTIFICAÇÃO] Enviada para {self.paciente.nome}: {self.mensagem}")
-            self._status = "enviada"
+    def validar_comentario(self, comentario):
+        """Valida se o comentário não está vazio."""
+        if comentario and comentario.strip():
+            self._comentario = comentario.strip()
         else:
-            print("Notificação já foi enviada anteriormente.")
+            raise ValueError("O comentário não pode estar vazio.")
     
-    def marcar_como_lida(self):
-        if self._status == "enviada":
-            self._status = "lida"
-            print("Notificação marcada como lida.")
-        else:
-            print("Não é possível marcar como lida: notificação não foi enviada ou já está lida.")
+    def exibir_avaliacao(self):
+        return f"Avaliação de {self.paciente.nome} para Dr(a). {self.medico.nome}: Nota {self.nota}/5 - \"{self.comentario}\""
