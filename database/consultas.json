@@ -1,1 +1,22 @@
-[]
+[
+    {
+        "paciente_cpf": "12345678909",
+        "medico_crm": "143424",
+        "data": "12/06/2026",
+        "horario": "12:00",
+        "local": "Bom de vida",
+        "valor": 200.0,
+        "status": "realizada",
+        "observacoes": "Tudo correto"
+    },
+    {
+        "paciente_cpf": "45678324581",
+        "medico_crm": "747632394",
+        "data": "23/06/2025",
+        "horario": "15:00",
+        "local": "Dom Pedro",
+        "valor": 400.0,
+        "status": "realizada",
+        "observacoes": "Retornar em 15 dias"
+    }
+]

@@ -61,3 +61,13 @@ class Avaliacao:
 
     def __str__(self):
         return f"Avaliação de {self.paciente.nome} para Dr(a). {self.medico.nome}: Nota {self.nota}/5 - {self.comentario}"
+    
+    def to_dict(self):
+        return {
+            "paciente_cpf": self.paciente.cpf,
+            "medico_crm": self.medico.crm,
+            "consulta_data": self.consulta.data,
+            "consulta_horario": self.consulta.horario,
+            "nota": self.nota,
+            "comentario": self.comentario
+        }

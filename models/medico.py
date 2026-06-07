@@ -120,3 +120,15 @@ class Medico(Usuario):
         print(f"Especialidade: {self.especialidade}")
         print(f"Clinica: {self.clinica}")
         print(f"Valor da consulta: R$ {self.valor_consulta:.2f}")
+
+    def to_dict(self):
+        return {
+            "nome": self.nome,
+            "cpf": self.cpf,
+            "email": self.email,
+            "senha": self.senha,
+            "crm": self.crm,
+            "especialidade": self.especialidade,
+            "clinica": self.clinica,
+            "valor_consulta": self.valor_consulta
+        }

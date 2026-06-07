@@ -75,3 +75,12 @@ class Paciente(Usuario):
         print(f"CPF: {self.cpf}")
         print(f"Email: {self.email}")
         print(f"Localização: {self.localizacao}")
+
+    def to_dict(self):
+        return {
+            "nome": self.nome,
+            "cpf": self.cpf,
+            "email": self.email,
+            "senha": self.senha,
+            "localizacao": self.localizacao
+        }

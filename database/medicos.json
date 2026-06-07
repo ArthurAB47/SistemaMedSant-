@@ -1,1 +1,22 @@
-[]
+[
+    {
+        "nome": "K",
+        "cpf": "12345678912",
+        "email": "K@L.com",
+        "senha": "kfsjnfs",
+        "crm": "143424",
+        "especialidade": "Terapeuta",
+        "clinica": "Bom de vida",
+        "valor_consulta": 200.0
+    },
+    {
+        "nome": "Antonio Carlos",
+        "cpf": "89056432671",
+        "email": "Antonio@pedroantonio.yahoo",
+        "senha": "fesfjesf",
+        "crm": "747632394",
+        "especialidade": "Otorrino",
+        "clinica": "Dom Pedro",
+        "valor_consulta": 400.0
+    }
+]

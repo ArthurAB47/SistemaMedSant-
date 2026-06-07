@@ -1,1 +1,18 @@
-[]
+[
+    {
+        "paciente_cpf": "12345678909",
+        "medico_crm": "143424",
+        "consulta_data": "12/06/2026",
+        "consulta_horario": "12:00",
+        "nota": 5,
+        "comentario": "Bom"
+    },
+    {
+        "paciente_cpf": "45678324581",
+        "medico_crm": "747632394",
+        "consulta_data": "23/06/2025",
+        "consulta_horario": "15:00",
+        "nota": 5,
+        "comentario": "Otimo Profissional"
+    }
+]

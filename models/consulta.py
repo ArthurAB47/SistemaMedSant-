@@ -115,3 +115,15 @@ class Consulta:
 
     def __str__(self): #Esse metodo só mostra um resumo em forma de texto da consulta.
         return f"Consulta com Dr(a). {self.medico.nome} em {self.data} às {self.horario} - Status: {self.status}"
+    
+    def to_dict(self):
+        return {
+            "paciente_cpf": self.paciente.cpf,
+            "medico_crm": self.medico.crm,
+            "data": self.data,
+            "horario": self.horario,
+            "local": self.local,
+            "valor": self.valor,
+            "status": self.status,
+            "observacoes": self.observacoes
+        }

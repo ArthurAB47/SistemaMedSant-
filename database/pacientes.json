@@ -1,1 +1,16 @@
-[]
+[
+    {
+        "nome": "F",
+        "cpf": "12345678909",
+        "email": "F@g.com",
+        "senha": "fejskfsjef",
+        "localizacao": "Portugal"
+    },
+    {
+        "nome": "Maria Luiza",
+        "cpf": "45678324581",
+        "email": "Maria@2345.com",
+        "senha": "jfsefsio",
+        "localizacao": "Belo Horizonte"
+    }
+]
