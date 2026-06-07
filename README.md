@@ -1,44 +1,139 @@
 # Sistema Med Santé
 
-### Desenvolvimento de um Sistema de Agendamento Médico em Python com Programação Orientada a Objetos
+## Desenvolvimento de um Sistema de Agendamento Médico em Python com Programação Orientada a Objetos
+
+### Integrantes
+
+* Arthur Vinicios de Abreu
+* Gabriela Julia dos Santos Silva
 
 ---
 
-## Sobre o Projeto
+## Visão Geral
 
-O Sistema Med Santé é um projeto desenvolvido para a disciplina de Programação Orientada a Objetos (POO) com o objetivo de simular um sistema de agendamento médico utilizando os principais conceitos da orientação a objetos em Python.
+O Sistema Med Santé é um sistema de agendamento médico desenvolvido em Python utilizando os princípios da Programação Orientada a Objetos (POO). O projeto tem como objetivo auxiliar no gerenciamento de pacientes, médicos, consultas, agendas, notificações e avaliações, proporcionando uma estrutura organizada para o controle dos atendimentos.
 
-O sistema permite o gerenciamento de pacientes, médicos, consultas, agendas, avaliações e notificações, buscando representar de forma simplificada o funcionamento de uma plataforma de agendamento de consultas médicas.
+O sistema permite o cadastro e gerenciamento dos usuários, o agendamento de consultas médicas, o acompanhamento do histórico de atendimentos e o armazenamento permanente dos dados por meio de arquivos JSON.
 
-Durante o desenvolvimento são aplicados conceitos como:
-
-* Encapsulamento;
-* Herança;
-* Polimorfismo;
-* Classes abstratas;
-* Getters e Setters;
-* Validação de dados;
-* Tratamento de exceções;
-* Persistência de dados em arquivos JSON;
-* Organização modular do código.
+Atualmente o sistema encontra-se funcional, possuindo integração entre todas as classes principais, persistência de dados e um menu interativo executado via terminal.
 
 ---
 
-## Objetivos
+## Objetivos do Projeto
 
-O projeto tem como objetivo desenvolver uma aplicação capaz de:
-
-* Cadastrar pacientes e médicos;
-* Realizar agendamentos de consultas;
-* Gerenciar horários disponíveis;
-* Controlar o status das consultas;
-* Registrar avaliações de atendimentos;
-* Gerar notificações para os usuários;
-* Armazenar informações de forma organizada.
+* Aplicar os conceitos de Programação Orientada a Objetos.
+* Desenvolver um sistema modular e organizado.
+* Simular o funcionamento básico de uma plataforma de agendamento médico.
+* Implementar armazenamento permanente dos dados.
+* Promover reutilização de código e separação de responsabilidades entre as classes.
 
 ---
 
-## Estrutura do Projeto
+## Funcionalidades Implementadas
+
+### Pacientes
+
+* Cadastro de pacientes.
+* Visualização de informações pessoais.
+* Marcação de consultas.
+* Cancelamento de consultas.
+* Remarcação de consultas.
+* Consulta ao histórico de atendimentos.
+
+### Médicos
+
+* Cadastro de médicos.
+* Visualização de dados profissionais.
+* Confirmação de presença do paciente.
+* Encerramento de consultas.
+* Recebimento de avaliações.
+* Cálculo da média das avaliações recebidas.
+
+### Consultas
+
+* Criação de consultas médicas.
+* Alteração de status.
+* Registro de observações médicas.
+* Controle de consultas realizadas e canceladas.
+
+### Agenda
+
+* Cadastro de horários disponíveis.
+* Controle de disponibilidade dos horários.
+* Gerenciamento das consultas marcadas.
+
+### Avaliações
+
+* Registro de notas e comentários.
+* Associação entre paciente, médico e consulta.
+* Cálculo da média de avaliações dos profissionais.
+
+### Notificações
+
+* Geração automática de mensagens para os pacientes.
+* Controle de envio e leitura das notificações.
+
+### Persistência de Dados
+
+O sistema realiza o armazenamento permanente dos dados utilizando arquivos JSON:
+
+* pacientes.json
+* medicos.json
+* consultas.json
+* avaliacoes.json
+
+Os dados são salvos automaticamente durante a utilização do sistema e carregados novamente sempre que a aplicação é iniciada.
+
+---
+
+## Requisitos de Programação Orientada a Objetos Aplicados
+
+Durante o desenvolvimento do projeto foram utilizados os seguintes conceitos:
+
+* Classes e Objetos
+* Encapsulamento
+* Herança
+* Classe Abstrata
+* Polimorfismo
+* Getters e Setters
+* Associação entre Objetos
+* Tratamento de Exceções
+* Persistência de Dados em Arquivos JSON
+
+---
+
+## Organização do Projeto
+
+### models/
+
+Contém as entidades principais do sistema:
+
+* Usuario
+* Paciente
+* Medico
+* Consulta
+* Agenda
+* Avaliacao
+* Notificacao
+
+### services/
+
+Contém a classe responsável pelo gerenciamento geral do sistema:
+
+* SistemaMedSante
+
+### database/
+
+Responsável pelo armazenamento permanente dos dados em formato JSON:
+
+* pacientes.json
+* medicos.json
+* consultas.json
+* avaliacoes.json
+
+---
+
+## Estrutura de Diretórios
 
 ```text
 SistemaMedSante/
@@ -48,8 +143,6 @@ SistemaMedSante/
 │   ├── medicos.json
 │   ├── consultas.json
 │   └── avaliacoes.json
-│
-├── docs/
 │
 ├── models/
 │   ├── usuario.py
@@ -70,174 +163,50 @@ SistemaMedSante/
 
 ---
 
-## Classes do Sistema
+## Fluxo Básico de Utilização
 
-### Usuario
-
-Classe abstrata responsável por armazenar os atributos comuns aos usuários do sistema.
-
-#### Principais atributos
-
-* nome
-* cpf
-* email
-* senha
-
-#### Principais responsabilidades
-
-* Validação de dados;
-* Encapsulamento de atributos;
-* Fornecimento de métodos comuns para pacientes e médicos.
+1. Cadastrar pacientes e médicos.
+2. Disponibilizar horários para atendimento.
+3. Realizar o agendamento de consultas.
+4. Confirmar a presença do paciente.
+5. Encerrar a consulta.
+6. Registrar avaliações.
+7. Salvar automaticamente os dados em arquivos JSON.
+8. Recuperar os dados ao reiniciar o sistema.
 
 ---
 
-### Paciente
+## Execução do Sistema
 
-Representa os pacientes cadastrados no sistema.
+Para executar o sistema:
 
-#### Funcionalidades
+```bash
+python main.py
+```
 
-* Marcar consultas;
-* Cancelar consultas;
-* Remarcar consultas;
-* Visualizar consultas agendadas;
-* Visualizar histórico de consultas;
-* Avaliar médicos após atendimentos concluídos.
+Após a execução, o usuário poderá utilizar o menu principal para realizar cadastros, consultas, avaliações e gerenciamento dos dados armazenados.
 
 ---
 
-### Medico
+## Situação Atual do Projeto
 
-Representa os profissionais responsáveis pelos atendimentos.
+O sistema possui atualmente:
 
-#### Funcionalidades
-
-* Gerenciar horários disponíveis;
-* Confirmar presença dos pacientes;
-* Encerrar consultas;
-* Visualizar avaliações recebidas;
-* Calcular média das avaliações.
-
----
-
-### Consulta
-
-Representa uma consulta médica entre um paciente e um médico.
-
-#### Informações armazenadas
-
-* Paciente;
-* Médico;
-* Data;
-* Horário;
-* Local;
-* Valor da consulta;
-* Status;
-* Observações médicas.
-
-#### Funcionalidades
-
-* Alteração de status;
-* Registro de observações;
-* Exibição dos dados da consulta.
+* Todas as classes principais implementadas.
+* Integração completa entre os módulos.
+* Persistência de dados em JSON.
+* Menu funcional via terminal.
+* Tratamento de exceções para validação de dados.
+* Funcionalidades essenciais para gerenciamento de consultas médicas.
 
 ---
 
-### Agenda
+## Próximas Melhorias
 
-Responsável pelo gerenciamento dos horários disponíveis dos médicos.
+* Implementação de interface gráfica.
+* Ampliação dos mecanismos de busca.
+* Melhorias no gerenciamento de agendas.
+* Expansão das funcionalidades administrativas.
+* Evolução da experiência de utilização do sistema.
 
-#### Funcionalidades previstas
-
-* Cadastro de horários disponíveis;
-* Cancelamento de horários;
-* Visualização da agenda;
-* Verificação de disponibilidade para novos agendamentos.
-
----
-
-### Avaliacao
-
-Responsável pelo armazenamento das avaliações realizadas pelos pacientes.
-
-#### Informações armazenadas
-
-* Paciente;
-* Médico;
-* Nota;
-* Comentário.
-
-#### Funcionalidades previstas
-
-* Registro de avaliações;
-* Exibição de avaliações;
-* Cálculo de médias dos profissionais.
-
----
-
-### Notificacao
-
-Responsável pelo envio e exibição de mensagens do sistema.
-
-#### Funcionalidades previstas
-
-* Geração de mensagens automáticas;
-* Lembretes de consultas;
-* Notificações para pacientes e médicos.
-
----
-
-### SistemaMedSante
-
-Classe principal responsável pela integração de todas as demais classes.
-
-#### Funcionalidades previstas
-
-* Cadastro de usuários;
-* Busca de médicos;
-* Gerenciamento de consultas;
-* Controle geral do sistema;
-* Persistência dos dados.
-
----
-
-## Tecnologias Utilizadas
-
-* Python 3
-* Programação Orientada a Objetos
-* Git
-* GitHub
-* Arquivos JSON
-
----
-
-## Status Atual do Projeto
-
-### Classes Implementadas
-
-* [x] Usuario
-* [x] Paciente
-* [x] Medico
-* [x] Consulta
-
-### Classes em Desenvolvimento
-
-* [ ] Agenda
-* [ ] Avaliacao
-* [ ] Notificacao
-* [ ] SistemaMedSante
-
----
-
-## Integrantes
-
-* Arthur Vinicios de Abreu
-* Gabriela Julia dos Santos Silva
-
----
-
-## Instituição
-
-Universidade Federal de Minas Gerais (UFMG)
-
-Disciplina: Programação Orientada a Objetos
+Essas melhorias poderão ser incorporadas em versões futuras do projeto.
