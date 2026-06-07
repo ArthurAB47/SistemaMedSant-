@@ -18,5 +18,25 @@
         "valor": 400.0,
         "status": "realizada",
         "observacoes": "Retornar em 15 dias"
+    },
+    {
+        "paciente_cpf": "45678324581",
+        "medico_crm": "747632394",
+        "data": "25/06/2026",
+        "horario": "13:00",
+        "local": "Dom Pedro",
+        "valor": 400.0,
+        "status": "agendada",
+        "observacoes": ""
+    },
+    {
+        "paciente_cpf": "12345678909",
+        "medico_crm": "747632394",
+        "data": "19/06/2026",
+        "horario": "19:00",
+        "local": "Dom Pedro",
+        "valor": 400.0,
+        "status": "agendada",
+        "observacoes": ""
     }
 ]

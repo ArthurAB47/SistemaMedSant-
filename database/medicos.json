@@ -7,7 +7,21 @@
         "crm": "143424",
         "especialidade": "Terapeuta",
         "clinica": "Bom de vida",
-        "valor_consulta": 200.0
+        "valor_consulta": 200.0,
+        "horarios_disponiveis": [
+            [
+                "29/06/2026",
+                "17:00"
+            ],
+            [
+                "01/07/2026",
+                "13:00"
+            ],
+            [
+                "03/07/2026",
+                "14:00"
+            ]
+        ]
     },
     {
         "nome": "Antonio Carlos",
@@ -17,6 +31,12 @@
         "crm": "747632394",
         "especialidade": "Otorrino",
         "clinica": "Dom Pedro",
-        "valor_consulta": 400.0
+        "valor_consulta": 400.0,
+        "horarios_disponiveis": [
+            [
+                "10/08/2026",
+                "17:00"
+            ]
+        ]
     }
 ]

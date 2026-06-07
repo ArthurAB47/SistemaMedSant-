@@ -27,7 +27,7 @@ class Consulta:
     @data.setter
     def data(self, data):
         if not self.validar_data(data):
-            raise ValueError("erro: A data não pode estar vazia!")
+            raise ValueError("erro: Data inválida. Use o formato DD/MM/AAAA!")
         self.__data = data.strip()
 
     @property
@@ -57,7 +57,30 @@ class Consulta:
         return self.__observacoes
 
     def validar_data(self, data):
-        return isinstance(data, str) and data.strip() != ""
+        if not isinstance(data, str):
+            return False
+
+        data = data.strip()
+        partes = data.split("/")
+
+        if len(partes) != 3:
+            return False
+
+        dia = partes[0]
+        mes = partes[1]
+        ano = partes[2]
+
+        if not dia.isdigit() or not mes.isdigit() or not ano.isdigit():
+            return False
+
+        if len(dia) != 2 or len(mes) != 2 or len(ano) != 4:
+            return False
+
+        dia = int(dia)
+        mes = int(mes)
+        ano = int(ano)
+
+        return 1 <= dia <= 31 and 1 <= mes <= 12 and ano > 0
 
     def validar_horario(self, horario):
         if not isinstance(horario, str):

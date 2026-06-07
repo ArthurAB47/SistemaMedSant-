@@ -184,6 +184,11 @@ class SistemaMedSante:
                     item["clinica"],
                     item["valor_consulta"]
                 )
+
+                if "horarios_disponiveis" in item:
+                    for data, horario in item["horarios_disponiveis"]:
+                        medico.cadastrar_horario(data, horario)
+
                 self.__medicos.append(medico)
 
         except FileNotFoundError:

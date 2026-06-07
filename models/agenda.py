@@ -17,6 +17,12 @@ class Agenda:
         return self.__consultas_marcadas.copy()
 
     def adicionar_horario(self, data, horario):
+        if not self.validar_data(data):
+            raise ValueError("erro: Data inválida. Use o formato DD/MM/AAAA!")
+        
+        if not self.validar_horario(horario):
+            raise ValueError("erro: Horário inválido. Use o formato HH:MM!")
+        
         horario_disponivel = (data.strip(), horario.strip())
 
         if horario_disponivel in self.__horarios_disponiveis:
@@ -70,3 +76,50 @@ class Agenda:
             print("Consultas marcadas:")
             for consulta in self.__consultas_marcadas:
                 print(consulta)
+
+    def validar_data(self, data):
+        if not isinstance(data, str):
+            return False
+
+        data = data.strip()
+        partes = data.split("/")
+
+        if len(partes) != 3:
+            return False
+
+        dia = partes[0]
+        mes = partes[1]
+        ano = partes[2]
+
+        if not dia.isdigit() or not mes.isdigit() or not ano.isdigit():
+            return False
+
+        if len(dia) != 2 or len(mes) != 2 or len(ano) != 4:
+            return False
+
+        dia = int(dia)
+        mes = int(mes)
+        ano = int(ano)
+
+        return 1 <= dia <= 31 and 1 <= mes <= 12 and ano > 0
+    
+    def validar_horario(self, horario):
+        if not isinstance(horario, str):
+            return False
+
+        horario = horario.strip()
+        partes = horario.split(":")
+
+        if len(partes) != 2:
+            return False
+
+        hora = partes[0]
+        minuto = partes[1]
+
+        if not hora.isdigit() or not minuto.isdigit():
+            return False
+
+        hora = int(hora)
+        minuto = int(minuto)
+
+        return 0 <= hora <= 23 and 0 <= minuto <= 59

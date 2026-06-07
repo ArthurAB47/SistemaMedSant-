@@ -11,6 +11,8 @@ def menu():
     print("7 - Listar consultas")
     print("8 - Encerrar consulta")
     print("9 - Avaliar consulta")
+    print("10 - Cadastrar horário para médico")
+    print("11 - Visualizar agenda de médico")
     print("0 - Sair")
 
 def main():
@@ -79,16 +81,20 @@ def main():
                     indice_medico = int(input("Escolha o médico: "))
                     medico = sistema.medicos[indice_medico]
 
-                    data = input("Data da consulta: ")
+                    data = input("Data da consulta (DD/MM/AAAA): ")
                     horario = input("Horário da consulta (HH:MM): ")
 
-                    consulta = paciente.marcar_consulta(medico, data, horario)
-                    sistema.registrar_consulta(consulta)
+                    if medico.agenda.verificar_disponibilidade(data, horario):
+                        consulta = paciente.marcar_consulta(medico, data, horario)
+                        medico.agenda.adicionar_consulta(consulta)
+                        sistema.registrar_consulta(consulta)
 
-                    notificacao = sistema.gerar_notificacao(paciente, consulta)
-                    notificacao.enviar()
+                        notificacao = sistema.gerar_notificacao(paciente, consulta)
+                        notificacao.enviar()
 
-                    print("Consulta marcada com sucesso!")
+                        print("Consulta marcada com sucesso!")
+                    else:
+                        print("Horário indisponível na agenda do médico.")
 
             elif opcao == "7":
                 sistema.listar_consultas()
@@ -133,6 +139,37 @@ def main():
                     )
 
                     avaliacao.exibir_avaliacao()
+
+            elif opcao == "10":
+                if len(sistema.medicos) == 0:
+                    print("Não há médicos cadastrados.")
+                else:
+                    print("Médicos:")
+                    for i, medico in enumerate(sistema.medicos):
+                        print(f"{i} - {medico.nome} | {medico.especialidade}")
+
+                    indice_medico = int(input("Escolha o médico: "))
+                    medico = sistema.medicos[indice_medico]
+
+                    data = input("Data disponível (DD/MM/AAAA): ")
+                    horario = input("Horário disponível (HH:MM): ")
+
+                    medico.cadastrar_horario(data, horario)
+                    sistema.salvar_dados()
+                    print("Horário cadastrado com sucesso!")
+
+            elif opcao == "11":
+                if len(sistema.medicos) == 0:
+                    print("Não há médicos cadastrados.")
+                else:
+                    print("Médicos:")
+                    for i, medico in enumerate(sistema.medicos):
+                        print(f"{i} - {medico.nome} | {medico.especialidade}")
+
+                    indice_medico = int(input("Escolha o médico: "))
+                    medico = sistema.medicos[indice_medico]
+
+                    medico.visualizar_agenda()
 
             elif opcao == "0":
                 print("Encerrando o sistema...")

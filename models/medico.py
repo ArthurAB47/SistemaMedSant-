@@ -1,4 +1,5 @@
 from models.usuario import Usuario
+from models.agenda import Agenda
 
 class Medico(Usuario):
     def __init__(self, nome, cpf, email, senha, crm, especialidade, clinica, valor_consulta):
@@ -8,7 +9,7 @@ class Medico(Usuario):
         self.__especialidade = None
         self.__clinica = None
         self.__valor_consulta = None
-        self.__agenda = []
+        self.__agenda = Agenda(self)
         self.__avaliacoes = []
 
         self.crm = crm
@@ -58,7 +59,7 @@ class Medico(Usuario):
 
     @property
     def agenda(self):
-        return self.__agenda.copy()
+        return self.__agenda
     
     @property
     def avaliacoes(self):
@@ -110,6 +111,17 @@ class Medico(Usuario):
 
         consulta.adicionar_observacao(observacao)
         consulta.alterar_status("realizada")
+
+    def cadastrar_horario(self, data, horario):
+        self.__agenda.adicionar_horario(data, horario)
+
+
+    def cancelar_horario(self, data, horario):
+        self.__agenda.remover_horario(data, horario)
+
+
+    def visualizar_agenda(self):
+        self.__agenda.listar_horarios_disponiveis()
     
     def exibir_dados(self):
         print("Dados do médico:")
@@ -130,5 +142,6 @@ class Medico(Usuario):
             "crm": self.crm,
             "especialidade": self.especialidade,
             "clinica": self.clinica,
-            "valor_consulta": self.valor_consulta
+            "valor_consulta": self.valor_consulta,
+            "horarios_disponiveis": self.agenda.horarios_disponiveis
         }
