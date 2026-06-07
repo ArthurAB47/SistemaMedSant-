@@ -1,64 +1,72 @@
 class Agenda:
-    """Agenda de um médico: gerencia horários disponíveis e consultas marcadas."""
-    
     def __init__(self, medico):
-        self._medico = medico
-        self._horarios_disponiveis = []   # lista de strings "DD/MM/AAAA HH:MM"
-        self._consultas_marcadas = []     # lista de objetos Consulta
-    
+        self.__medico = medico
+        self.__horarios_disponiveis = []
+        self.__consultas_marcadas = []
+
     @property
     def medico(self):
-        return self._medico
-    
+        return self.__medico
+
     @property
     def horarios_disponiveis(self):
-        return self._horarios_disponiveis.copy()
-    
+        return self.__horarios_disponiveis.copy()
+
     @property
     def consultas_marcadas(self):
-        return self._consultas_marcadas.copy()
-    
-    def adicionar_horario(self, horario):
-        """Adiciona um horário à lista de disponíveis."""
-        if horario not in self._horarios_disponiveis:
-            self._horarios_disponiveis.append(horario)
-            print(f"Horário {horario} adicionado à agenda de {self.medico.nome}.")
-        else:
-            print("Horário já existe na agenda.")
-    
-    def remover_horario(self, horario):
-        """Remove um horário disponível."""
-        if horario in self._horarios_disponiveis:
-            self._horarios_disponiveis.remove(horario)
-            print(f"Horário {horario} removido.")
-        else:
-            print("Horário não encontrado.")
-    
-    def verificar_disponibilidade(self, horario):
-        """Verifica se um horário está disponível."""
-        return horario in self._horarios_disponiveis
-    
+        return self.__consultas_marcadas.copy()
+
+    def adicionar_horario(self, data, horario):
+        horario_disponivel = (data.strip(), horario.strip())
+
+        if horario_disponivel in self.__horarios_disponiveis:
+            raise ValueError("erro: Esse horário já está disponível na agenda!")
+
+        self.__horarios_disponiveis.append(horario_disponivel)
+
+    def remover_horario(self, data, horario):
+        horario_disponivel = (data.strip(), horario.strip())
+
+        if horario_disponivel not in self.__horarios_disponiveis:
+            raise ValueError("erro: Horário não encontrado na agenda!")
+
+        self.__horarios_disponiveis.remove(horario_disponivel)
+
+    def verificar_disponibilidade(self, data, horario):
+        horario_disponivel = (data.strip(), horario.strip())
+        return horario_disponivel in self.__horarios_disponiveis
+
     def adicionar_consulta(self, consulta):
-        """Marca uma consulta: adiciona à lista e remove o horário dos disponíveis."""
-        if consulta.data_hora in self._horarios_disponiveis:
-            self._consultas_marcadas.append(consulta)
-            self._horarios_disponiveis.remove(consulta.data_hora)
-            print(f"Consulta agendada para {consulta.data_hora} com Dr(a). {self.medico.nome}.")
-        else:
-            raise ValueError("Horário não disponível para agendamento.")
-    
+        horario_consulta = (consulta.data, consulta.horario)
+
+        if horario_consulta not in self.__horarios_disponiveis:
+            raise ValueError("erro: Horário não disponível para agendamento!")
+
+        self.__consultas_marcadas.append(consulta)
+        self.__horarios_disponiveis.remove(horario_consulta)
+
     def remover_consulta(self, consulta):
-        """Cancela uma consulta: remove da lista e devolve o horário aos disponíveis."""
-        if consulta in self._consultas_marcadas:
-            self._consultas_marcadas.remove(consulta)
-            self._horarios_disponiveis.append(consulta.data_hora)
-            consulta.status = "cancelada"
-            print(f"Consulta de {consulta.data_hora} cancelada. Horário reaberto.")
-        else:
-            print("Consulta não encontrada na agenda.")
-    
+        if consulta not in self.__consultas_marcadas:
+            raise ValueError("erro: Consulta não encontrada na agenda!")
+
+        self.__consultas_marcadas.remove(consulta)
+        consulta.alterar_status("cancelada")
+
+        horario_liberado = (consulta.data, consulta.horario)
+        self.__horarios_disponiveis.append(horario_liberado)
+
     def listar_horarios_disponiveis(self):
-        return self._horarios_disponiveis.copy()
-    
+        if len(self.__horarios_disponiveis) == 0:
+            print("Não há horários disponíveis na agenda.")
+        else:
+            print("Horários disponíveis:")
+            for data, horario in self.__horarios_disponiveis:
+                print(f"{data} às {horario}")
+
     def listar_consultas_marcadas(self):
-        return [c.exibir_resumo() for c in self._consultas_marcadas]
+        if len(self.__consultas_marcadas) == 0:
+            print("Não há consultas marcadas na agenda.")
+        else:
+            print("Consultas marcadas:")
+            for consulta in self.__consultas_marcadas:
+                print(consulta)

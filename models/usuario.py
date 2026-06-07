@@ -1,4 +1,4 @@
-from abc import ABC, abstractclassmethod
+from abc import ABC, abstractmethod
 
 class Usuario(ABC):
     def __init__(self, nome, cpf, email, senha):
@@ -76,6 +76,6 @@ class Usuario(ABC):
     def validar_senha(self, senha):
         return isinstance(senha, str) and len(senha) >= 6
     
-    @abstractclassmethod
+    @abstractmethod
     def exibir_dados(self):
         pass

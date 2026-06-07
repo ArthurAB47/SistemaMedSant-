@@ -5,7 +5,7 @@ class Medico(Usuario):
         super().__init__(nome, cpf, email, senha)
 
         self.__crm = None
-        self.__especalidade = None
+        self.__especialidade = None
         self.__clinica = None
         self.__valor_consulta = None
         self.__agenda = []
@@ -28,13 +28,13 @@ class Medico(Usuario):
 
     @property
     def especialidade(self):
-         return self.__especalidade
+         return self.__especialidade
     
     @especialidade.setter
     def especialidade(self, especialidade):
          if not self.validar_especialidade(especialidade):
               raise ValueError("erro: A especialidade não pode estar vazia!")
-         self.__especalidade = especialidade.strip()
+         self.__especialidade = especialidade.strip()
 
     @property
     def clinica(self):
@@ -94,6 +94,9 @@ class Medico(Usuario):
             soma += avaliacao.nota
 
         return soma / len(self.__avaliacoes)
+    
+    def adicionar_avaliacao(self, avaliacao):
+        self.__avaliacoes.append(avaliacao)
     
     def confirmar_presenca_paciente(self, consulta):
         if consulta.medico != self:

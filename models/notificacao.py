@@ -1,37 +1,36 @@
 class Notificacao:
-    """Representa uma notificação enviada ao paciente sobre sua consulta."""
-    
     def __init__(self, paciente, consulta):
-        self._paciente = paciente
-        self._consulta = consulta
-        self._mensagem = ""
-        self._status = "pendente"   # pendente, enviada, lida
+        self.__paciente = paciente
+        self.__consulta = consulta
+        self.__mensagem = ""
+        self.__status = "pendente"  
         self.gerar_mensagem()
     
     @property
     def paciente(self):
-        return self._paciente
+        return self.__paciente
     
     @property
     def consulta(self):
-        return self._consulta
+        return self.__consulta
     
     @property
     def mensagem(self):
-        return self._mensagem
+        return self.__mensagem
     
     @property
     def status(self):
-        return self._status
+        return self.__status
     
     def gerar_mensagem(self):
-        """Gera automaticamente a mensagem com base nos dados da consulta."""
-        self._mensagem = (f"Olá {self.paciente.nome}, sua consulta com Dr(a). {self.consulta.medico.nome} "
-                          f"está agendada para {self.consulta.data_hora}. Status: {self.consulta.status}.")
+        self.__mensagem = (
+            f"Olá {self.paciente.nome}, sua consulta com Dr(a). {self.consulta.medico.nome} "
+            f"está agendada para {self.consulta.data} às {self.consulta.horario}."
+            f"Status: {self.consulta.status}."
+        )
     
     def enviar(self):
-        """Simula o envio da notificação."""
-        if self._status == "pendente":
+        if self.__status == "pendente":
             print(f"[NOTIFICAÇÃO] Enviada para {self.paciente.nome}: {self.mensagem}")
             self._status = "enviada"
         else:
