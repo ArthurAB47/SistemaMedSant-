@@ -156,7 +156,6 @@ SistemaMedSante/
 ├── services/
 │   └── sistema_med_sante.py
 │
-├── interface.py
 ├── main.py
 └── README.md
 ```
